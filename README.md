@@ -1,5 +1,5 @@
-# Заходим через root пользователя
-Обновляем и устанавливаем нужные пакеты для VDS сервера
+# root пользователь
+Устанавливаем пакеты
 ```
 apt-get update
 apt-get install -y sudo vim mosh tmux htop git curl wget unzip zip gcc build-essential make vsftpd ufw
@@ -36,11 +36,11 @@ adduser www
 ```
 passwd www
 ```
-Предоставляем фулл доступ для редактирование пользователю
+Предоставляем доступ
 ```
 chown www /home/www
 ```
-Даём доступ в конфиге для www пользователя
+Предоставляем доступ в конфиге для www пользователя
 ```
 nano /etc/sudoers
 ```
@@ -48,8 +48,8 @@ nano /etc/sudoers
 ```
 www	ALL=(ALL)  ALL
 ```
-## Заходим через www пользователя
-Устанавливаем нужные пакеты для VDS сервера
+## www пользователя
+Устанавливаем пакеты
 ```
 sudo apt-get install -y zsh tree redis-server nginx zlib1g-dev libbz2-dev libreadline-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev liblzma-dev python3-dev python-pil python3-lxml libxslt-dev python-libxml2 libffi-dev libssl-dev python-dev gnumeric libsqlite3-dev libpq-dev libxml2-dev libxslt1-dev libjpeg-dev libfreetype6-dev libcurl4-openssl-dev supervisor
 ```
@@ -72,7 +72,6 @@ chsh -s $(which zsh)
 which zsh
 ```
 Скачиваем архив Python и собираем
-
 ```
 wget https://www.python.org/ftp/python/3.10.1/Python-3.10.1.tgz
 tar xvf Python-3.10.1
@@ -83,7 +82,7 @@ make -j8
 sudo make altinstall
 . ~/.zshrc
 ```
-Возвращаемcя на главную
+Возвращаемcя на главную и настраиваем струтктуру
 ```
 cd
 mkdir code
@@ -98,8 +97,8 @@ python3.10 -m venv env
 pip install gunicorn
 ```
 !!! ОБЯЗАТЕЛЬНО УСТАНОВИТЬ ДАННЫЙ ПАКЕТ !!!
-# Перекидываем проект джанго
-Устанавливаем нужные пакеты для проекта
+# Перекидываем проект Django
+Устанавливаем пакеты для проекта
 ```
 pip install -r requirements.txt
 ```
@@ -115,7 +114,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 ```
-Создать gunicorn_config.py по пути ```#pwd /home/www/code/taskmanager/taskmanager```
+Создать gunicorn_config.py по пути ```pwd #/home/www/code/taskmanager/taskmanager```
 ```
 sudo nano gunicorn_config.py
 ```
@@ -130,7 +129,7 @@ limit_request_fields = 32000
 limit_request_field_size = 0
 raw_env = 'DJANGO_SETTINGS_MODULE=taskmanager.settings'
 ```
-Создать start_gunicorn.sh по пути ```#pwd /home/www/code/taskmanager/bin```
+Создать start_gunicorn.sh по пути ```pwd #/home/www/code/taskmanager/bin```
 ```
 mkdir bin
 nano bin/start_gunicorn.sh
